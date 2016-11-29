@@ -1,0 +1,10 @@
+---
+- name: JavaEE
+  hosts: jee
+  become: yes
+  vars_files:
+    - proxy.yml
+  environment: "{{ proxy_env }}"
+  roles:
+    - ../ansible_common/common
+    - ../ansible_common/glassfish
