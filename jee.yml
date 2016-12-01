@@ -8,3 +8,4 @@
   roles:
     - ../ansible_common/common
     - ../ansible_common/glassfish
+    - { role: ../ansible_common/firewalld, PORTS:["4848/tcp","8080/tcp"] }
