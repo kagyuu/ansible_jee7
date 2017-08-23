@@ -1,21 +1,20 @@
 ---
 - name: Download activiti
-  stat: path=/tmp/activiti-{{ activiti_version }}.zip
-  register: zip_archive
+  stat: path=/vagrant/activiti-{{ activiti_version }}.zip
+  register: activiti_zip_archive
 
 - get_url:
     url: https://github.com/Activiti/Activiti/releases/download/activiti-{{ activiti_version }}/activiti-{{ activiti_version }}.zip
-    dest: /tmp
+    dest: /vagrant
     validate_certs: false
     timeout: 60
-  when: (not zip_archive.stat.exists)
+  when: (not activiti_zip_archive.stat.exists)
 
 - name: Expand activiti zip
   unarchive:
-    src=/tmp/activiti-{{ activiti_version }}.zip
+    src=/vagrant/activiti-{{ activiti_version }}.zip
     dest=/tmp
     copy=no
-  when: (not zip_archive.stat.exists)
 
 - name: Create target directory
   file: path=/opt/activiti-{{ activiti_version }}/activiti-{{ item }} state=directory mode=0755
