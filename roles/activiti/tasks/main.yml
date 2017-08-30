@@ -32,3 +32,35 @@
     - rest
     - app
     - admin
+
+- name: activiti-app.properties (activiti-app)
+  template:
+    src=activiti-app.properties
+    dest=/opt/activiti-6.0.0/activiti-app/WEB-INF/classes/META-INF/activiti-app/activiti-app.properties
+    force=yes
+
+- name: db.properties (activiti-rest)
+  template:
+    src=db.properties
+    dest=/opt/activiti-6.0.0/activiti-rest/WEB-INF/classes/db.properties
+    force=yes
+
+- name: engine.properties (activiti-rest)
+  template:
+    src=engine.properties
+    dest=/opt/activiti-6.0.0/activiti-rest/WEB-INF/classes/engine.properties
+    force=yes
+
+- name: activiti-admin.properties (activiti-admin)
+  template:
+    src=activiti-admin.properties
+    dest=/opt/activiti-6.0.0/activiti-admin/WEB-INF/classes/META-INF/activiti-admin/activiti-admin.properties
+    force=yes
+
+- name: deploy activiti
+  command:
+    /opt/glassfish4/bin/asadmin deploy --force true --type war /opt/activiti-6.0.0/activiti-{{ item }}
+  with_items:
+    - rest
+    - app
+    - admin
