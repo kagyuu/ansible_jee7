@@ -57,6 +57,9 @@
     dest=/opt/activiti-6.0.0/activiti-admin/WEB-INF/classes/META-INF/activiti-admin/activiti-admin.properties
     force=yes
 
+- name: Install language file
+  copy: src=ja.json dest=/opt/activiti-6.0.0/activiti-admin/i18n/ja.json mode=0644
+
 - name: deploy activiti
   command:
     /opt/glassfish4/bin/asadmin deploy --force true --type war /opt/activiti-6.0.0/activiti-{{ item }}
