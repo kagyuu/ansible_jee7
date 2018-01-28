@@ -7,17 +7,12 @@
   environment: "{{ proxy_env }}"
   roles:
     - ../ansible_common/common
-    - { role: ../ansible_common/postgres, db_name: activiti, db_passwd: "{{ db_passwd_activiti }}" }
-    - { role: ../ansible_common/postgres, db_name: activitiadmin, db_passwd: "{{ db_passwd_activiti }}", init: false }
+    - { role: ../ansible_common/postgres
+        , db_name: sampledb
+        , db_passwd: "{{ sampledb_passwd }}" }
     - { role: ../ansible_common/glassfish
-        , db_name: activiti
-        , db_passwd: "{{ db_passwd_activiti }}"
+        , db_name: sampledb
+        , db_passwd: "{{ sampledb_passwd }}"
         , db: postgresql
-      }
-    - { role: activiti
-        , db_name: activiti
-        , db_passwd: "{{ db_passwd_activiti }}"
-        , adm_db_name: activitiadmin
-        , adm_db_passwd: "{{ db_passwd_activiti }}"
       }
     - { role: ../ansible_common/firewalld, PORTS:["4848/tcp","8080/tcp","5432/tcp"] }
